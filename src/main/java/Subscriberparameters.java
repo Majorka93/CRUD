@@ -14,5 +14,23 @@ public class Subscriberparameters {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String toString() {
+        return getName() + " " + getSurname() + " " + getBirthday() + " " + getPhoneNumber();
+    }
 }
