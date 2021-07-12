@@ -9,7 +9,7 @@ public class Directory {
 
         try {
             String str = null;
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\s0w1n\\Desktop\\Subscribers.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
 
             while ((str = br.readLine()) != null) {
                 String[] list = str.split(";");
