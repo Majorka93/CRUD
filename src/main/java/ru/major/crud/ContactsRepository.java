@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface ContactsRepository {
 
-    List<Contact> findAllContacts(String args0) throws IOException;
+    List<Contact> findAllContacts() throws IOException;
 
-    List<Contact> selectByPhone(String args0, Long args2) throws IOException;
+    List<Contact> selectByPhone(Long args2) throws IOException;
+
+    void addContact (String phoneNumber, String name, String surname, String birthday) throws IOException;
 
 }

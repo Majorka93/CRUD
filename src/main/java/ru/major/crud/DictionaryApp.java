@@ -13,16 +13,16 @@ public class DictionaryApp {
 
 
         List<Contact> contacts = new ArrayList<>();
-        ContactsRepository usersFile = new UsersFile();
+        ContactsRepository usersFile = new UsersFile(args[0]);
 
         if (args[1].equalsIgnoreCase("select") && !args[2].isEmpty()) {
 
-            contacts = usersFile.selectByPhone(args[0], Long.parseLong(args[2]));
+            contacts = usersFile.selectByPhone(Long.parseLong(args[2]));
 
         } else if (args[1].equalsIgnoreCase("select") && args[2].isEmpty()) {
 
 
-            contacts = usersFile.findAllContacts(args[0]);
+            contacts = usersFile.findAllContacts();
 
         } else {
             System.out.println("Вы не выбрали команду");
