@@ -1,9 +1,6 @@
 package ru.major.crud;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +14,6 @@ public class UsersFile implements ContactsRepository {
 
     @Override
     public List<Contact> findAllContacts() throws IOException {
-
 
 
         List<Contact> sublist = new ArrayList<>();
@@ -56,6 +52,19 @@ public class UsersFile implements ContactsRepository {
 
     @Override
     public void addContact(String phoneNumber, String name, String surname, String birthday) throws IOException {
+
+
+        FileWriter writer = new FileWriter(pathToFile, true);
+        writer.write("\n");
+        writer.write(name);
+        writer.write(";");
+        writer.write(surname);
+        writer.write(";");
+        writer.write(birthday);
+        writer.write(";");
+        writer.write(phoneNumber);
+        writer.close();
+        System.out.println("Файл записан");
 
     }
 }

@@ -15,6 +15,8 @@ public class DictionaryApp {
         List<Contact> contacts = new ArrayList<>();
         ContactsRepository usersFile = new UsersFile(args[0]);
 
+
+
         if (args[1].equalsIgnoreCase("select") && !args[2].isEmpty()) {
 
             contacts = usersFile.selectByPhone(Long.parseLong(args[2]));
@@ -24,8 +26,11 @@ public class DictionaryApp {
 
             contacts = usersFile.findAllContacts();
 
-        } else {
+        } else if(args[1].equalsIgnoreCase("create")) {
+            usersFile.addContact(args[2],args[3],args[4],args[5]);
+        }else {
             System.out.println("Вы не выбрали команду");
+
         }
 
         for (Contact contact : contacts) {
