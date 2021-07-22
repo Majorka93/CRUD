@@ -12,4 +12,8 @@ public interface ContactsRepository {
 
     void addContact (String phoneNumber, String name, String surname, String birthday) throws IOException;
 
+    void deleteContact (String phoneNumber) throws IOException;
+
+    void updateContact (String phoneNumber, String name, String surname, String birthday) throws IOException;
+
 }

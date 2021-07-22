@@ -16,19 +16,23 @@ public class DictionaryApp {
         ContactsRepository usersFile = new UsersFile(args[0]);
 
 
-
-        if (args[1].equalsIgnoreCase("select") && !args[2].isEmpty()) {
+        if (args.length == 3 && args[1].equalsIgnoreCase("select") && !args[2].isEmpty()) {
 
             contacts = usersFile.selectByPhone(Long.parseLong(args[2]));
 
-        } else if (args[1].equalsIgnoreCase("select") && args[2].isEmpty()) {
+        } else if (args[1].equalsIgnoreCase("select")) {
 
 
             contacts = usersFile.findAllContacts();
 
-        } else if(args[1].equalsIgnoreCase("create")) {
-            usersFile.addContact(args[2],args[3],args[4],args[5]);
-        }else {
+        } else if (args[1].equalsIgnoreCase("create")) {
+            usersFile.addContact(args[2], args[3], args[4], args[5]);
+
+        } else if (args.length == 3 && args[1].equalsIgnoreCase("delete") && !args[2].isEmpty()) {
+
+            usersFile.deleteContact(args[2]);
+
+        } else {
             System.out.println("Вы не выбрали команду");
 
         }

@@ -1,6 +1,11 @@
 package ru.major.crud;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +29,11 @@ public class UsersFile implements ContactsRepository {
 
             while ((str = br.readLine()) != null) {
                 String[] list = str.split(";");
+
+                if (list.length == 5 && list[4].equalsIgnoreCase("deleted")) {
+                    continue;
+
+                }
                 long i = Long.parseLong(list[3].trim());
                 sublist.add(new Contact(list[0], list[1], list[2], i));
 
@@ -67,7 +77,34 @@ public class UsersFile implements ContactsRepository {
         System.out.println("Файл записан");
 
     }
+
+    @Override
+    public void deleteContact(String phoneNumber) throws IOException {
+
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(pathToFile), StandardCharsets.UTF_8));
+
+        for (int i = 0; i < fileContent.size(); i++) {
+            if (fileContent.get(i).contains(phoneNumber)) {
+                fileContent.remove(i);
+                break;
+            }
+
+        }
+
+        Files.write(Paths.get(pathToFile), fileContent, StandardCharsets.UTF_8);
+
+    }
+
+    @Override
+    public void updateContact(String phoneNumber, String name, String surname, String birthday) throws IOException {
+
+
+
+    }
+
+
 }
+
 
 
 
