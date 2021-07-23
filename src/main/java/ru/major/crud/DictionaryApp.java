@@ -32,7 +32,10 @@ public class DictionaryApp {
 
             usersFile.deleteContact(args[2]);
 
-        } else {
+        } else if (args.length == 6 && args[1].equalsIgnoreCase("update") && !args[2].isEmpty()) {
+            usersFile.updateContact(args[2], args[3], args[4], args[5]);
+
+        }else{
             System.out.println("Вы не выбрали команду");
 
         }

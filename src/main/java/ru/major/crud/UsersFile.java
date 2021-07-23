@@ -34,6 +34,9 @@ public class UsersFile implements ContactsRepository {
                     continue;
 
                 }
+                if (list.length == 1){
+                    continue;
+                }
                 long i = Long.parseLong(list[3].trim());
                 sublist.add(new Contact(list[0], list[1], list[2], i));
 
@@ -98,10 +101,23 @@ public class UsersFile implements ContactsRepository {
     @Override
     public void updateContact(String phoneNumber, String name, String surname, String birthday) throws IOException {
 
-
+        Contact contact = selectByPhone(Long.parseLong(phoneNumber)).get(0);
+        deleteContact(phoneNumber);
+        String updateName = name;
+        String updateSurname = surname;
+        String updateBirthday = birthday;
+        if (name.isEmpty()){
+            updateName = contact.getName();
+        }
+        if (surname.isEmpty()){
+            updateSurname = contact.getSurname();
+        }
+        if (birthday.isEmpty()){
+            updateBirthday = contact.getBirthday();
+        }
+        addContact(phoneNumber,updateName,updateSurname,updateBirthday);
 
     }
-
 
 }
 
