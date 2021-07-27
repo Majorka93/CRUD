@@ -34,7 +34,7 @@ public class UsersFile implements ContactsRepository {
                     continue;
 
                 }
-                if (list.length == 1){
+                if (list.length == 1) {
                     continue;
                 }
                 long i = Long.parseLong(list[3].trim());
@@ -103,19 +103,11 @@ public class UsersFile implements ContactsRepository {
 
         Contact contact = selectByPhone(Long.parseLong(phoneNumber)).get(0);
         deleteContact(phoneNumber);
-        String updateName = name;
-        String updateSurname = surname;
-        String updateBirthday = birthday;
-        if (name.isEmpty()){
-            updateName = contact.getName();
-        }
-        if (surname.isEmpty()){
-            updateSurname = contact.getSurname();
-        }
-        if (birthday.isEmpty()){
-            updateBirthday = contact.getBirthday();
-        }
-        addContact(phoneNumber,updateName,updateSurname,updateBirthday);
+        String updateName = name.isEmpty() ? contact.getName() : name;
+        String updateSurname = surname.isEmpty() ? contact.getSurname() : surname;
+        String updateBirthday = birthday.isEmpty() ? contact.getBirthday() : birthday;
+
+        addContact(phoneNumber, updateName, updateSurname, updateBirthday);
 
     }
 
