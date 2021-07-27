@@ -5,9 +5,9 @@ public class Contact {
     private String name;
     private String surname;
     private String birthday;
-    private long phoneNumber;
+    private String phoneNumber;
 
-    public Contact(String name, String surname, String birthday, long phoneNumber) {
+    public Contact(String name, String surname, String birthday, String phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
@@ -28,7 +28,7 @@ public class Contact {
         return birthday;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

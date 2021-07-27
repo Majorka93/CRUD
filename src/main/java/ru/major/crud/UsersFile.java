@@ -34,11 +34,11 @@ public class UsersFile implements ContactsRepository {
                     continue;
 
                 }
-                if (list.length == 1){
+                if (list.length == 1) {
                     continue;
                 }
-                long i = Long.parseLong(list[3].trim());
-                sublist.add(new Contact(list[0], list[1], list[2], i));
+
+                sublist.add(new Contact(list[0], list[1], list[2], list[3]));
 
             }
 
@@ -52,11 +52,11 @@ public class UsersFile implements ContactsRepository {
     }
 
     @Override
-    public List<Contact> selectByPhone(Long args2) throws IOException {
+    public List<Contact> selectByPhone(String phoneNumber) throws IOException {
         List<Contact> filteredByPhone = new ArrayList<>();
         List<Contact> allContacts = findAllContacts();
         for (Contact contact : allContacts) {
-            if (contact.getPhoneNumber() == args2)
+            if (contact.getPhoneNumber().equals(phoneNumber))
                 filteredByPhone.add(contact);
         }
 
@@ -101,21 +101,21 @@ public class UsersFile implements ContactsRepository {
     @Override
     public void updateContact(String phoneNumber, String name, String surname, String birthday) throws IOException {
 
-        Contact contact = selectByPhone(Long.parseLong(phoneNumber)).get(0);
+        Contact contact = selectByPhone(phoneNumber).get(0);
         deleteContact(phoneNumber);
         String updateName = name;
         String updateSurname = surname;
         String updateBirthday = birthday;
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             updateName = contact.getName();
         }
-        if (surname.isEmpty()){
+        if (surname.isEmpty()) {
             updateSurname = contact.getSurname();
         }
-        if (birthday.isEmpty()){
+        if (birthday.isEmpty()) {
             updateBirthday = contact.getBirthday();
         }
-        addContact(phoneNumber,updateName,updateSurname,updateBirthday);
+        addContact(phoneNumber, updateName, updateSurname, updateBirthday);
 
     }
 

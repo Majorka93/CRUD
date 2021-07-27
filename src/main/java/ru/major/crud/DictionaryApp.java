@@ -18,7 +18,7 @@ public class DictionaryApp {
 
         if (args.length == 3 && args[1].equalsIgnoreCase("select") && !args[2].isEmpty()) {
 
-            contacts = usersFile.selectByPhone(Long.parseLong(args[2]));
+            contacts = usersFile.selectByPhone(args[2]);
 
         } else if (args[1].equalsIgnoreCase("select")) {
 

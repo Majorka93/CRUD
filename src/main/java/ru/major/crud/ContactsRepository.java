@@ -8,7 +8,7 @@ public interface ContactsRepository {
 
     List<Contact> findAllContacts() throws IOException;
 
-    List<Contact> selectByPhone(Long args2) throws IOException;
+    List<Contact> selectByPhone(String phoneNumber) throws IOException;
 
     void addContact (String phoneNumber, String name, String surname, String birthday) throws IOException;
 
