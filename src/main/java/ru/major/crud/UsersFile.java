@@ -103,18 +103,10 @@ public class UsersFile implements ContactsRepository {
 
         Contact contact = selectByPhone(phoneNumber).get(0);
         deleteContact(phoneNumber);
-        String updateName = name;
-        String updateSurname = surname;
-        String updateBirthday = birthday;
-        if (name.isEmpty()) {
-            updateName = contact.getName();
-        }
-        if (surname.isEmpty()) {
-            updateSurname = contact.getSurname();
-        }
-        if (birthday.isEmpty()) {
-            updateBirthday = contact.getBirthday();
-        }
+        String updateName = name.isEmpty() ? contact.getName() : name;
+        String updateSurname = surname.isEmpty() ? contact.getSurname() : surname;
+        String updateBirthday = birthday.isEmpty() ? contact.getBirthday() : birthday;
+
         addContact(phoneNumber, updateName, updateSurname, updateBirthday);
 
     }
