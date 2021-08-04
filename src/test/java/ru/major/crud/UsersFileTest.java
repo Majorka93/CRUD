@@ -31,21 +31,23 @@ public class UsersFileTest {
 
     @Test
     public void deleteContactTest() throws IOException {
-//todo Тесты проверить в 2 этапа. Сначала проверяем начальное состояние, потом проверяем результат
+
         UsersFile repository = findFilePath("SubscribersTest.txt");
         List<Contact> allContacts = repository.findAllContacts();
-        repository.deleteContact("+79996660000");
-        assertEquals(4, repository.findAllContacts().size());
+        assertEquals(4, allContacts.size());
+        repository.deleteContact("+79046741610");
+        assertEquals(3, repository.findAllContacts().size());
     }
 
     @Test
     public void updateContactTest() throws IOException {
         UsersFile repository = findFilePath("SubscribersTest.txt");
-        repository.updateContact("+79046741611", "Сергей", "Жириновский", "01.02.1945");
         List<Contact> allContacts = repository.findAllContacts();
-        assertEquals("Сергей", allContacts.get(3).getName());
         assertEquals("Жириновский", allContacts.get(3).getSurname());
-        assertEquals("01.02.1945", allContacts.get(3).getBirthday());
+        repository.updateContact("+79996660000", "Сергей", "Жириновский2", "01.02.1945");
+        assertEquals("Жириновский2", repository.selectByPhone("+79996660000").get(0).getSurname());
+        repository.updateContact("+79996660000", "Сергей", "Жириновский", "01.02.1945");
+        assertEquals("Жириновский", repository.selectByPhone("+79996660000").get(0).getSurname());
     }
 
     private UsersFile findFilePath(String fileName) {

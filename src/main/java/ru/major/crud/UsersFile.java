@@ -4,12 +4,14 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersFile implements ContactsRepository {
+
 
     private String pathToFile;
 
@@ -66,7 +68,7 @@ public class UsersFile implements ContactsRepository {
     @Override
     public void addContact(String phoneNumber, String name, String surname, String birthday) throws IOException {
 
-
+//todo проверить файл на пустоту
         FileWriter writer = new FileWriter(pathToFile, true);
         writer.write("\n");
         writer.write(name);
@@ -85,16 +87,16 @@ public class UsersFile implements ContactsRepository {
     public void deleteContact(String phoneNumber) throws IOException {
 
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(pathToFile), StandardCharsets.UTF_8));
+        String contacts = "";
 
         for (int i = 0; i < fileContent.size(); i++) {
-            if (fileContent.get(i).contains(phoneNumber)) {
-                fileContent.remove(i);
-                break;
+            if (!fileContent.get(i).contains(phoneNumber)) {
+                contacts += fileContent.get(i) + "\n";
             }
 
         }
 
-        Files.write(Paths.get(pathToFile), fileContent, StandardCharsets.UTF_8);
+        Files.write(Paths.get(pathToFile), contacts.substring(0,contacts.length()-1).getBytes(StandardCharsets.UTF_8));
 
     }
 
