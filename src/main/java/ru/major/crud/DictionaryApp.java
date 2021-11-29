@@ -37,28 +37,29 @@ public class DictionaryApp {
             System.out.println("Загружаем бд из файла : " + cmd.getOptionValue("d"));
             usersFile = new UsersFile(cmd.getOptionValue("d"));
 
+        } else {
+            System.out.println("Загружаем пользователей из бд");
+            usersFile = new UsersDb();
 
-            if (cmd.hasOption("s") && !cmd.hasOption("p")) {
-                contacts = usersFile.findAllContacts();
+        }
 
-            } else if (cmd.hasOption("s") && cmd.hasOption("p")) {
-                contacts = usersFile.selectByPhone(cmd.getOptionValue("p"));
 
-            } else if (cmd.hasOption("del")) {
-                usersFile.deleteContact(cmd.getOptionValue("p"));
-            } else if (cmd.hasOption("a")) {
-                usersFile.addContact(cmd.getOptionValue("p"), cmd.getOptionValue("n"), cmd.getOptionValue("sn"), cmd.getOptionValue("b"));
-            } else if (cmd.hasOption("u")) {
-                usersFile.updateContact(cmd.getOptionValue("p"), cmd.getOptionValue("n"), cmd.getOptionValue("sn"), cmd.getOptionValue("b"));
-            } else {
-                HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("CRUD by major", options);
-            }
+        if (cmd.hasOption("s") && !cmd.hasOption("p")) {
+            contacts = usersFile.findAllContacts();
+
+        } else if (cmd.hasOption("s") && cmd.hasOption("p")) {
+            contacts = usersFile.selectByPhone(cmd.getOptionValue("p"));
+
+        } else if (cmd.hasOption("del")) {
+            usersFile.deleteContact(cmd.getOptionValue("p"));
+        } else if (cmd.hasOption("a")) {
+            usersFile.addContact(cmd.getOptionValue("p"), cmd.getOptionValue("n"), cmd.getOptionValue("sn"), cmd.getOptionValue("b"));
+        } else if (cmd.hasOption("u")) {
+            usersFile.updateContact(cmd.getOptionValue("p"), cmd.getOptionValue("n"), cmd.getOptionValue("sn"), cmd.getOptionValue("b"));
         } else {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("CRUD by major", options);
         }
-
 
         for (Contact contact : contacts) {
             System.out.println(contact);
